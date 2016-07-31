@@ -1,5 +1,3 @@
-<center><p><img src="https://scontent-kul.xx.fbcdn.net/v/t1.0-9/563612_658005220891970_726741343_n.jpg?oh=88336832180bece1ee8091c7d88b976f&oe=585A7827"/></p></center>
-
 # SECURDE-Talaria
 
 In order to reach a larger market, Talaria Footwear Company has decided to set up their own online store. With your knowledge in developing secure web applications, the company anticipates that you will be able to assist them in constructing their e-commerce portal. The following are the requirements supplied by the company:
