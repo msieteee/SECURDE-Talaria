@@ -51,3 +51,20 @@
 .review-p{
 	text-align: left;
 }
+
+.transact-btn{
+	font-size: 0.9em;
+	/*padding: 50.9x;*/
+	padding-top: 12px;
+	padding-bottom: 12px;
+	padding-left: 30px;
+	padding-right: 30px;
+	background-color: black;
+	color: white;
+	border-radius: 0px;
+}
+
+.transact-btn:hover{
+	text-decoration: underline;
+	color: white;
+}

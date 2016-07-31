@@ -80,6 +80,15 @@ a:after {
 
 }
 
+.text-space{
+	letter-spacing: 3px;
+	text-transform: uppercase;;
+}
+
+.disabled{
+	background-color: #efefef !important;
+}
+
 
 /* ==========================================================================
    Wrap Sections

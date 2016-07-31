@@ -89,7 +89,7 @@
 	<div id="w2">
 		<div class="container">
 			<div class = "cm-header">
-				<span>PRODUCT DETAILS</span>
+				<span>TRANSACTION</span>
 			</div>
 		</div><!-- /container -->
 		<br>
@@ -98,17 +98,39 @@
 			<div class = "row">
 				<div class = "col-lg-4 col-lg-offset-1">
 					<img class="" src="assets\img\ub-coreblack.png" alt="">
+					<div class ="row">
+						<!-- <br> -->
+						<h4>Adidas Originals - Ultraboost "Core Black"</h4>
+						<h5>Php 9,995.00</h5>
+						<!-- <hr> -->
+					</div>
 				</div>
 				<div class = "col-lg-6 product-details vcenter">
-					<div class ="row">
-						<br>
-						<h3>Adidas Originals - Ultraboost "Core Black"</h3>
-						<h4>Php 9,995.00</h4>
-						<hr>
-					</div>
-					<div class = "row">
-						<input type="text" name="user" class="text-fld col-lg-8 " placeholder="Full Name">
-					</div>
+					<form>
+						<div class = "row">
+							<h6 class="text-space"><b>Shipping Address</b></h6>
+							<input type="text" name="shipadd" disabled="true" class="text-fld col-lg-10 disabled" value="21 A Bonifacio St. Sayaman Cmpd">
+						</div>
+						<div class = "row">
+							<h6 class="text-space"><b>Shipping Address</b></h6>
+							<input type="text" name="shipadd" disabled="true" class="text-fld col-lg-10 disabled" value="21 A Bonifacio St. Sayaman Cmpd">
+						</div>
+						<div class = "row">
+							<h6 class="text-space"><b>Billing Address</b></h6>
+							<input type="text" name="billadd" disabled="true" class="text-fld col-lg-10 disabled" value="21 A Bonifacio St. Sayaman Cmpd">
+						</div>
+						<div class = "row">
+							<h6 class="text-space"><b>Credit Card No.</b></h6>
+							<input type="text" name="shipadd"= class="text-fld col-lg-10" placeholder="Credit Card No.">
+						</div>
+						<div class = "row">
+							<h6 class="text-space"><b>Quantity</b></h6>
+							<input type="number" name="quantity" class="text-fld col-lg-2" placeholder="Qty.">
+							<div class="col-lg-3 col-lg-offset-1">
+								<input type="submit" name="login" class="btn btn-lg transact-btn" value="CONFIRM">
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
