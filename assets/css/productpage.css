@@ -1,0 +1,53 @@
+.product-details{
+	text-align: left;
+}
+
+.product-btn{
+	background-color: #1a1a1a;
+	color: #fff;
+	border-width: 0px;
+	border-radius: 0px;
+	padding: 12.5px;
+	padding-left: 40px;
+	padding-right: 40px;
+	font-size: 1em;
+}
+
+.product-btn:hover{
+	color: #fff;
+	text-decoration: underline;
+}
+
+.product-tab-wrapper{
+	margin-top: 2%;
+}
+
+.product-tab > a{
+	color: #1a1a1a;
+	letter-spacing: 2px;
+}
+
+.tab-p{
+	text-align: left;
+}
+
+/*REVIEW*/
+
+.review-wrapper{
+	margin-top: 15px;
+	margin-left: 30px;
+	margin-bottom: 15px;
+	text-align: left;
+}
+
+.no-lh{
+	line-height: 1em;
+}
+
+.no-margin{
+	margin: 0px !important;
+}
+
+.review-p{
+	text-align: left;
+}
