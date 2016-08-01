@@ -68,3 +68,7 @@
 	text-decoration: underline;
 	color: white;
 }
+
+.th-custom{
+	border-bottom-width: 1px !important;
+}
