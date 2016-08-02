@@ -231,7 +231,42 @@ public class Queries {
             pst.setString(2, email);
             pst.setInt(3, ba_id);
             pst.setInt(4, sa_id);
-            System.out.println(pst);
+            pst.executeUpdate();
+            System.out.println("yey");
+        } catch (Exception e) {
+            System.out.println("boooooo");
+        }
+    }
+    
+    public void addProductManager(String username, String password, int role) {
+        connection = new DBConnection().getConnection();
+
+        PreparedStatement pst;
+        String query = "INSERT INTO accounts (username, password, role_id) VALUES (?, ?, ?)";
+        
+        try {
+            pst = connection.prepareStatement(query);
+            pst.setString(1, username);
+            pst.setString(2, password);
+            pst.setInt(3, role);
+            pst.executeUpdate();
+            System.out.println("yey");
+        } catch (Exception e) {
+            System.out.println("boooooo");
+        }
+    }
+    
+    public void addAccountManager(String username, String password, int role) {
+        connection = new DBConnection().getConnection();
+
+        PreparedStatement pst;
+        String query = "INSERT INTO accounts (username, password, role_id) VALUES (?, ?, ?)";
+        
+        try {
+            pst = connection.prepareStatement(query);
+            pst.setString(1, username);
+            pst.setString(2, password);
+            pst.setInt(3, role);
             pst.executeUpdate();
             System.out.println("yey");
         } catch (Exception e) {
@@ -277,8 +312,7 @@ public class Queries {
 	        	String description = rs.getString("product_description");
 	        	double price = rs.getDouble("product_price");
 	        	int category = rs.getInt("product_category");
-	        	String image = rs.getString("product_image");
-	        	ProductDetails pd = new ProductDetails(name, description, price, category, image);
+	        	ProductDetails pd = new ProductDetails(name, description, price, category);
 	        	products.add(pd);
 	        }
 		} catch (SQLException e) {
@@ -309,8 +343,7 @@ public class Queries {
 	        	String description = rs.getString("product_description");
 	        	double price = rs.getDouble("product_price");
 	        	int category = rs.getInt("product_category");
-	        	String image = rs.getString("product_image");
-	        	ProductDetails pd = new ProductDetails(name, description, price, category, image);
+	        	ProductDetails pd = new ProductDetails(name, description, price, category);
 	        	products.add(pd);
 	        }
 		} catch (SQLException e) {
@@ -339,8 +372,7 @@ public class Queries {
 	        	String description = rs.getString("product_description");
 	        	double price = rs.getDouble("product_price");
 	        	int category = rs.getInt("product_category");
-	        	String image = rs.getString("product_image");
-	        	product = new ProductDetails(name, description, price, category, image);
+	        	product = new ProductDetails(name, description, price, category);
 	        }
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
