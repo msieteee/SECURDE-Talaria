@@ -22,9 +22,10 @@
 	margin-top: 2%;
 }
 
-.product-tab > a{
+.product-info{
 	color: #1a1a1a;
-	letter-spacing: 2px;
+	letter-spacing: 2px !important;
+	text-transform: uppercase;
 }
 
 .tab-p{

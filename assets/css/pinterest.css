@@ -24,7 +24,7 @@ stylize any heading tags withing white-panel below
 .white-panel h1 a {
   color: #1a1a1a !important;
 }
-.panel-link{
+.product-info{
   color: #1a1a1a;
   font-style: bold;
   letter-spacing: 2px;
@@ -56,4 +56,14 @@ stylize any heading tags withing white-panel below
 .view-pinterest-btn:hover{
   color: #fff;
   text-decoration: underline;
+}
+
+.product-btn{
+  background-color: #1a1a1a;
+  color: #fff;
+  border-radius: 0px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 0.8em;
 }
