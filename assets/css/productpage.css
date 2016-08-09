@@ -72,3 +72,19 @@
 .th-custom{
 	border-bottom-width: 1px !important;
 }
+
+.product-cat-btn{
+	background-color: transparent;
+	color: #1a1a1a;
+	letter-spacing: 2px;
+	margin: 0px;
+	padding: 0px;
+	text-transform: uppercase;
+	border-width: 0px;
+	outline-width: 0px;
+	font-weight: 300;
+}
+
+.product-cat-btn:hover{
+	text-decoration: underline;
+}
