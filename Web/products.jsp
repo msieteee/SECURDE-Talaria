@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -6,41 +11,43 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>TALARIA</title>
+	<title>TALARIA</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
+	<!-- Bootstrap core CSS -->
+	<link href="assets/css/bootstrap.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="assets/css/main.css" rel="stylesheet">
-    <link href="assets/css/loginmodal.css" rel="stylesheet">
-    <link href="assets/css/register.css" rel="stylesheet">
-    <link href="assets/css/productpage.css" rel="stylesheet">
+	<!-- Custom styles for this template -->
+	<link href="assets/css/main.css" rel="stylesheet">
+	<link href="assets/css/loginmodal.css" rel="stylesheet">
+	<link href="assets/css/register.css" rel="stylesheet">
+	<link href="assets/css/pinterest.css" rel="stylesheet">
+	<link href="assets/css/productpage.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/font-awesome-4.6.3/css/font-awesome.min.css">
 	<!-- <link rel="stylesheet" id="font-awesome-css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css" media="screen"> -->
- 
 
-    <script src="assets/js/jquery.min.js"></script>
-	<!-- <script src="assets/js/custom.js"></script> -->
-	<!-- <script src="assets/js/pinterest.js"></script> -->
 
-	
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/custom.js"></script>
+	<script src="assets/js/pinterest.js"></script>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+
+	<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700'
+	rel='stylesheet' type='text/css'>
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
       <script src="assets/js/html5shiv.js"></script>
       <script src="assets/js/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body data-spy="scroll" data-offset="0">
-	
+<body data-spy="scroll" data-offset="0">
+
 	<!-- ========== HEADER SECTION ========== -->
 	<div id="itemwrap">
 		<div class="container">
-			<br>	
+			<br>
 			<div class="row">
 				<div class="col-lg-6 col-lg-offset-3">
 					<h1>TALARIA</h1>
@@ -49,121 +56,99 @@
 					<button id="regbtn" data-toggle="modal" data-target="#register-modal" class = "btn btn-lg btn-header">REGISTER NOW</button>
 				</div>
 			</div>
-		</div><!-- /container -->
-	</div><!-- /headerwrap -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /headerwrap -->
 
 	<!-- NAVBAR -->
 	<nav class="navbar navbar-default navbar-custom" role="navigation">
-	  <div class="navbar-header">
-	    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 	      <span class="icon-bar"></span>
 	      <span class="icon-bar"></span>
 	      <span class="icon-bar"></span>
-	    </button>    
-	  </div>
-	  <div class="">
-	    <ul class="nav navbar-nav">
-	    	<li><a href="#about" class="smoothScroll nav-item">Home</a></li>
-	        <li><a href="#about" class="smoothScroll nav-item">Products</a></li>
-	        <li><a href="#about" class="smoothScroll nav-item">About</a></li>
-	        <li><a href="#about" class="smoothScroll nav-item">Contact</a></li>
-	    </ul>
-	  </div>
+	    </button>  
+	</div>
+	<div class="">
+		<ul class="nav navbar-nav">
+			<li><a href="#about" class="smoothScroll nav-item">Home</a></li>
+			<li><a href="#about" class="smoothScroll nav-item">Products</a></li>
+			<li><a href="#about" class="smoothScroll nav-item">About</a></li>
+			<li><a href="#about" class="smoothScroll nav-item">Contact</a></li>
+		</ul>
+	</div>
 	</nav>
-	
-	
+
+
 	<!-- ========== WHITE SECTION ========== -->
 	<div id="w">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-lg-offset-2">
-					<h3 class = "pull-left">
-						PROVIDING <b>QUALITY</b> LOCALLY MADE PRODUCTS. STYLISH AND COMFORTABLE FOR YOUR EVERYDAY USE. 
+					<h3 class="pull-left">
+						PROVIDING <b>QUALITY</b> LOCALLY MADE PRODUCTS. STYLISH AND COMFORTABLE FOR YOUR EVERYDAY USE.
 					</h3>
 				</div>
 			</div>
 		</div><!-- /container -->
-	</div><!-- /w -->
+	</div>
+	<!-- /w -->
 
 	<!-- ========== CAROUSEL / DESCRIPTION - DARK GREY SECTION ========== -->
 	<div id="w2">
 		<div class="container">
-			<div class = "cm-header">
-				<span>PRODUCT DETAILS</span>
+			<div class="cm-header">
+				<span>PRODUCTS</span>
 			</div>
-		</div><!-- /container -->
+		</div>
+		<!-- /container -->
 		<br>
 
 		<div class="container">
-			<div class = "row">
-				<div class = "col-lg-4 col-lg-offset-1">
-					<img class="" src="assets\img\ub-coreblack.png" alt="">
-				</div>
-				<div class = "col-lg-6 product-details vcenter">
-					<div class = "row">
-						<br>
-						<h3>Adidas Originals - Ultraboost "Core Black"</h3>
-						<h4>Php 9,995.00</h4>
-						<hr>
-						<button class="product-btn">PURCHASE</button>
-					</div>
-				</div>
+			<div class="row">
+				<form method="POST" action="Filter">
+					<input type = "submit" name = "filter" value = "ALL" class="product-cat-btn"></button> -
+					<input type = "submit" name = "filter" value = "BOOTS" class="product-cat-btn"></button> - 
+					<input type = "submit" name = "filter" value = "SHOES" class="product-cat-btn"></button> - 
+					<input type = "submit" name = "filter" value = "SANDALS" class="product-cat-btn"></button> - 
+					<input type = "submit" name = "filter" value = "SLIPPERS" class="product-cat-btn"></button>
+                </form>
 			</div>
-			<div class = "row">
-				<div class = "col-lg-10 col-lg-offset-1 product-tab-wrapper">
-					<ul class="nav nav-tabs" role="tablist">
-					  <li role="presentation" class="product-tab active"><a href="#a" data-toggle="tab" role="tab" >DESCRIPTION</a></li>
-					  <li role="presentation" class="product-tab"><a href="#b" data-toggle="tab" role="tab" >REVIEWS</a></li>
-					</ul>
-
-					<div class="tab-content">
-						<div role="tabpanel" id="a" class="tab-pane fade in active">
-							<!-- <div class="row"> -->
-							<br>
-							<p class="tab-p">These men's running shoes are the ultimate experience in luxurious stability. Whether you're training or running a full marathon, their plush boost midsole keeps every step charged with energy. An adaptive adidas Primeknit upper and ergonomic heel give lightweight support exactly where it's needed, and a STRETCHWEB outsole provides a smooth, stable heel-to-toe transition.</p>
-							<!-- </div> -->
-						</div>
-
-						<div role="tabpanel" id="b" class="tab-pane fade" >
-							<div class="review-wrapper">
-								<div class="row">
-									<h4><b>Miguel Sietereales</b></h4><h5 class="no-lh no-margin">July 31, 2016</h5>
-								</div>
-								<div class="row">
-									<p class="review-p">These men's running shoes are the ultimate experience in luxurious stability. Whether you're training or running a full marathon, their plush boost midsole keeps every step charged with energy. An adaptive adidas Primeknit upper and ergonomic heel give lightweight support exactly where it's needed, and a STRETCHWEB outsole provides a smooth, stable heel-to-toe transition.</p>
-								</div>
-							</div>
-							<div class="review-wrapper">
-								<div class="row">
-									<h4><b>Miguel Sietereales</b></h4><h5 class="no-lh no-margin">July 31, 2016</h5>
-								</div>
-								<div class="row">
-									<p class="review-p">These men's running shoes are the ultimate experience in luxurious stability. Whether you're training or running a full marathon, their plush boost midsole keeps every step charged with energy. An adaptive adidas Primeknit upper and ergonomic heel give lightweight support exactly where it's needed, and a STRETCHWEB outsole provides a smooth, stable heel-to-toe transition.</p>
-								</div>
-							</div>
-							<div class="review-wrapper">
-								<div class="row">
-									<h4><b>Miguel Sietereales</b></h4><h5 class="no-lh no-margin">July 31, 2016</h5>
-								</div>
-								<div class="row">
-									<p class="review-p">These men's running shoes are the ultimate experience in luxurious stability. Whether you're training or running a full marathon, their plush boost midsole keeps every step charged with energy. An adaptive adidas Primeknit upper and ergonomic heel give lightweight support exactly where it's needed, and a STRETCHWEB outsole provides a smooth, stable heel-to-toe transition.</p>
-								</div>
-							</div>
-						</div>
-					</div>
+			</br>
+			<section id="pinBoot"> 
+			<c:forEach items="${allProducts}" var="p" varStatus="loop">
+				<article class="white-panel">
+				<img class="pin-image" src="" alt="">
+				<div class="row">
+					<h5></h5>
 				</div>
-			</div>
+				<div class="product-info">
+					<b>${p.name}<br>${p.price}</b>
+				</div>
+				<div class="row">
+					<form method="POST" action="Product">
+						<input type="hidden" name="index" id="product-index"
+							value="${loop.index}" /> <input type="submit" name="product-btn"
+							class="btn btn-lg product-btn" value="VIEW DETAILS">
+					</form>
+				</div>
+
+				</article>
+			</c:forEach> 
+		</section>
+
 		</div>
 
 		<br>
 		<div class="container">
-			<div class = "cm-header">
+			<div class="cm-header">
 				<span>TALARIA</span>
 			</div>
-		</div><!-- /container -->
-		<br>
-		<br>
-		
+		</div>
+		<!-- /container -->
+		<br> <br>
+
 		<div class="container">
 			<div class = "row col-lg-5">
 				<div class="col-lg-6 desc desc-a">
@@ -190,6 +175,7 @@
 						<span>SIGN UP</span>
 					</div>
 					</br>
+
 					<form>
 						<div class = "row">
 							<input type="text" name="user" class="text-fld col-lg-8 col-lg-offset-2" placeholder="Full Name">
@@ -340,8 +326,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <!-- <script src="assets/js/bootstrap.min.js"></script> -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/main.js"></script>
 </body>
 </html>

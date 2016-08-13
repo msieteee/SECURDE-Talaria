@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -15,14 +19,14 @@
     <link href="assets/css/main.css" rel="stylesheet">
     <link href="assets/css/loginmodal.css" rel="stylesheet">
     <link href="assets/css/register.css" rel="stylesheet">
-    <link href="assets/css/pinterest.css" rel="stylesheet">
+    <link href="assets/css/productpage.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/font-awesome-4.6.3/css/font-awesome.min.css">
 	<!-- <link rel="stylesheet" id="font-awesome-css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css" media="screen"> -->
  
 
     <script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/custom.js"></script>
-	<script src="assets/js/pinterest.js"></script>
+	<!-- <script src="assets/js/custom.js"></script> -->
+	<!-- <script src="assets/js/pinterest.js"></script> -->
 
 	
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
@@ -89,60 +93,54 @@
 	<div id="w2">
 		<div class="container">
 			<div class = "cm-header">
-				<span>PRODUCTS</span>
+				<span>TRANSACTION</span>
 			</div>
 		</div><!-- /container -->
 		<br>
 
 		<div class="container">
 			<div class = "row">
-				<a class="category-text" href="#">All</a> - 
-				<a class="category-text" href="#">BOOTS</a> - 
-				<a class="category-text" href="#">SHOES</a> - 
-				<a class="category-text" href="#">SANDALS</a> - 
-				<a class="category-text" href="#">SLIPPERS</a>
+				<div class = "col-lg-4 col-lg-offset-1">
+					<img class="" src="assets\img\ub-coreblack.png" alt="">
+					<div class ="row">
+					<c:set var="pd" value="${pd}" scope="request"></c:set>
+						<!-- <br> -->
+						<h4>${pd.name}</h4>
+						<h5>${pd.price}</h5>
+						<!-- <hr> -->
+					</div>
+				</div>
+				<div class = "col-lg-6 product-details vcenter">
+					<form method="POST" action="Transaction">
+						<div class = "row">
+						<c:set var="n" value="${name}" scope="request"></c:set>
+							<h6 class="text-space"><b>Full Name</b></h6>
+							<input type="text" name="name" disabled="true" class="text-fld col-lg-10 disabled" value="${n}">
+						</div>
+						<div class = "row">
+						<c:set var="s" value="${shipad}" scope="request"></c:set>
+							<h6 class="text-space"><b>Shipping Address</b></h6>
+							<input type="text" name="shipadd" disabled="true" class="text-fld col-lg-10 disabled" value="${s}">
+						</div>
+						<div class = "row">
+						<c:set var="b" value="${billad}" scope="request"></c:set>
+							<h6 class="text-space"><b>Billing Address</b></h6>
+							<input type="text" name="billadd" disabled="true" class="text-fld col-lg-10 disabled" value="${b}">
+						</div>
+						<div class = "row">
+							<h6 class="text-space"><b>Credit Card No.</b></h6>
+							<input type="text" name="creditcard"= class="text-fld col-lg-10" placeholder="Credit Card No.">
+						</div>
+						<div class = "row">
+							<h6 class="text-space"><b>Quantity</b></h6>
+							<input type="number" name="quantity" class="text-fld col-lg-2" placeholder="Qty.">
+							<div class="col-lg-3 col-lg-offset-1">
+								<input type="submit" name="login" class="btn btn-lg transact-btn" value="CONFIRM">
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
-			</br>
-			<section id="pinBoot">
-
-				<article class="white-panel"><img class="pin-image" src="assets\img\ub-coreblack.png" alt="">
-					<h5><a class="panel-link" href="#"><b>Adidas Originals<br>Ultraboost "Core Black"<br>PHP 9,995.00</b></a></h5>
-				</article>
-
-				<article class="white-panel"><img class="pin-image" src="assets\img\ub-coreblack.png" alt="">
-					<h5><a class="panel-link" href="#"><b>Adidas Originals<br>Ultraboost "Core Black"<br>PHP 9,995.00</b></a></h5>
-				</article>
-
-				<article class="white-panel"><img class="pin-image" src="assets\img\ub-coreblack.png" alt="">
-					<h5><a class="panel-link" href="#"><b>Adidas Originals<br>Ultraboost "Core Black"<br>PHP 9,995.00</b></a></h5>
-				</article>
-
-				<article class="white-panel"><img class="pin-image" src="assets\img\ub-coreblack.png" alt="">
-					<h5><a class="panel-link" href="#"><b>Adidas Originals<br>Ultraboost "Core Black"<br>PHP 9,995.00</b></a></h5>
-				</article>
-
-				<article class="white-panel"><img class="pin-image" src="assets\img\ub-coreblack.png" alt="">
-					<h5><a class="panel-link" href="#"><b>Adidas Originals<br>Ultraboost "Core Black"<br>PHP 9,995.00</b></a></h5>
-				</article>
-
-				<article class="white-panel"><img class="pin-image" src="assets\img\ub-coreblack.png" alt="">
-					<h5><a class="panel-link" href="#"><b>Adidas Originals<br>Ultraboost "Core Black"<br>PHP 9,995.00</b></a></h5>
-				</article>
-
-				<article class="white-panel"><img class="pin-image" src="assets\img\ub-coreblack.png" alt="">
-					<h5><a class="panel-link" href="#"><b>Adidas Originals<br>Ultraboost "Core Black"<br>PHP 9,995.00</b></a></h5>
-				</article>
-
-				<article class="white-panel"><img class="pin-image" src="assets\img\ub-coreblack.png" alt="">
-					<h5><a class="panel-link" href="#"><b>Adidas Originals<br>Ultraboost "Core Black"<br>PHP 9,995.00</b></a></h5>
-				</article>
-
-				<article class="white-panel"><img class="pin-image" src="assets\img\ub-coreblack.png" alt="">
-					<h5><a class="panel-link" href="#"><b>Adidas Originals<br>Ultraboost "Core Black"<br>PHP 9,995.00</b></a></h5>
-				</article>		
-
-			</section>
-
 		</div>
 
 		<br>
@@ -180,7 +178,6 @@
 						<span>SIGN UP</span>
 					</div>
 					</br>
-
 					<form>
 						<div class = "row">
 							<input type="text" name="user" class="text-fld col-lg-8 col-lg-offset-2" placeholder="Full Name">
@@ -331,7 +328,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- <script src="assets/js/bootstrap.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="assets/js/main.js"></script>
 </body>
 </html>

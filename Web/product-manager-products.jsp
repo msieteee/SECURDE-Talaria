@@ -1,3 +1,12 @@
+<%-- 
+    Document   : product-manager-products
+    Created on : 08 10, 16, 6:38:28 PM
+    Author     : berryraindrop
+--%>
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,14 +24,15 @@
     <link href="assets/css/main.css" rel="stylesheet">
     <link href="assets/css/loginmodal.css" rel="stylesheet">
     <link href="assets/css/register.css" rel="stylesheet">
+    <link href="assets/css/pinterest.css" rel="stylesheet">
     <link href="assets/css/productpage.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/font-awesome-4.6.3/css/font-awesome.min.css">
 	<!-- <link rel="stylesheet" id="font-awesome-css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css" media="screen"> -->
  
 
     <script src="assets/js/jquery.min.js"></script>
-	<!-- <script src="assets/js/custom.js"></script> -->
-	<!-- <script src="assets/js/pinterest.js"></script> -->
+	<script src="assets/js/custom.js"></script>
+	<script src="assets/js/pinterest.js"></script>
 
 	
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
@@ -87,60 +97,102 @@
 
 	<!-- ========== CAROUSEL / DESCRIPTION - DARK GREY SECTION ========== -->
 	<div id="w2">
+
 		<div class="container">
 			<div class = "cm-header">
-				<span>ACCOUNT CREATION</span>
+				<span>ADD NEW PRODUCT</span>
 			</div>
 		</div><!-- /container -->
 		<br>
 
 		<div class="container">
 			<div class = "row">
-				<div class = "col-lg-5 col-lg-offset-1">
-					<div class = "row">
-						<div class = "cm-header">
-							<span>PRODUCT MANAGER</span>
-						</div>
-						</br>
-						<form>
+				<div class = "col-lg-8 col-lg-offset-2">
+					<div class = "product-details">					
+						<form id="AddProduct" action="AddProduct" method="POST" name="AddProduct">
 							<div class = "row">
-								<input type="text" name="user" class="text-fld col-lg-8 col-lg-offset-2" placeholder="Username">
+								<h6 class="text-space col-lg-offset-1"><b>Name</b></h6>
+								<input type="text" name="shipadd" class="text-fld col-lg-10 col-lg-offset-1" id="name" placeholder="Product Name">
 							</div>
 							<div class = "row">
-								<input type="password" name="pass" class="pass-fld col-lg-8 col-lg-offset-2" placeholder="Password">
+								<h6 class="text-space col-lg-offset-1"><b>Category</b></h6>
+								<select id="category" name="category" class="cust-select col-lg-10 col-lg-offset-1">
+								  <option>Shoes</option>
+								  <option>Slippers</option>
+								  <option>Sandals</option>
+                                  <option>Boots</option>
+								</select>
 							</div>
 							<div class = "row">
-								<input type="password" name="pass" class="pass-fld col-lg-8 col-lg-offset-2" placeholder="Confirm Password">
+								<h6 class="text-space col-lg-offset-1"><b>Description</b></h6>
+								<textarea class="cust-area col-lg-10 col-lg-offset-1" rows="5" id="description" name="description" maxlength="250" placeholder="Product Description"></textarea>
 							</div>
 							<div class = "row">
-								<input type="submit" name="login" class="btn btn-lg register-btn" value="REGISTER">
-							</div>			
-						</form>
-					</div>
-				</div>
-				<div class = "col-lg-5">					
-					<div class = "row">
-						<div class = "cm-header">
-							<span>ACCOUNTING MANAGER</span>
-						</div>
-						</br>
-						<form>
-							<div class = "row">
-								<input type="text" name="user" class="text-fld col-lg-8 col-lg-offset-2" placeholder="Username">
+								<h6 class="text-space col-lg-offset-1"><b>Unit Price</b></h6>
+								<input type="number" class="text-fld col-lg-10 col-lg-offset-1" id="price" name="price" placeholder="Unit Price">
 							</div>
 							<div class = "row">
-								<input type="password" name="pass" class="pass-fld col-lg-8 col-lg-offset-2" placeholder="Password">
+							<h6 class="text-space col-lg-offset-1"><b>Quantity</b></h6>
+								<input type="number" class="text-fld col-lg-2 col-lg-offset-1" placeholder="Qty." id="qty" name="qty" placeholder="Quantity">
+								<div class="col-lg-3 col-lg-offset-6">
+									<input type="submit" name="login" class="btn btn-lg transact-btn" value="ADD">
+								</div>
 							</div>
-							<div class = "row">
-								<input type="password" name="pass" class="pass-fld col-lg-8 col-lg-offset-2" placeholder="Confirm Password">
-							</div>
-							<div class = "row">
-								<input type="submit" name="login" class="btn btn-lg register-btn" value="REGISTER">
-							</div>			
 						</form>
 					</div>
 				</div>
 			</div>
+		</div>
+		<br>
+		<br>
+		<div class="container">
+			<div class = "cm-header">
+				<span>EDIT PRODUCTS</span>
+			</div>
+		</div><!-- /container -->
+		<br>
+
+		<div class="container">
+			<div class = "row">
+				<form method="POST" action="FilterProdMan">
+					<input type = "submit" name = "filter" value = "ALL" class="product-cat-btn"></button> -
+					<input type = "submit" name = "filter" value = "BOOTS" class="product-cat-btn"></button> - 
+					<input type = "submit" name = "filter" value = "SHOES" class="product-cat-btn"></button> - 
+					<input type = "submit" name = "filter" value = "SANDALS" class="product-cat-btn"></button> - 
+					<input type = "submit" name = "filter" value = "SLIPPERS" class="product-cat-btn"></button>
+                </form>
+			</div>
+			</br>
+                        
+			<section id="pinBoot">
+                            <c:forEach items="${allProducts}" var="p" varStatus="loop">
+                            <article class="white-panel">
+                                
+                                <img class="pin-image" src="assets\img\ub-coreblack.png" alt="">
+				
+                                    <div class="row">	
+					<h5>
+                                            <div class="product-info">
+                                                    <b>${p.name}</b>
+                                            </div>
+                                        </h5>
+                                        </div>
+                                        <div class="row">
+                                            <form method="POST" action="ToEditProduct">
+                                                <input type="hidden" name="index" id="product-index" value="${loop.index}" />
+                                                <input type="hidden" name="product-index" id="product-index" value="0"/>
+                                                <input type="submit" name="pm-product-btn" class="pm-product-btn" value="EDIT PRODUCT">
+                                             </form>	
+                                             <form method="POST" action="DeleteProduct">
+                                                <input type="hidden" name="index" id="product-index" value="${loop.index}" />
+                                                <input type="hidden" name="product-index" id="product-index" value="0"/>
+                                                <input type="submit" name="pm-product-btn" class="pm-product-btn" value="DELETE PRODUCT">
+                                             </form>
+                                        </div>
+                                </article>
+                            </c:forEach>										
+			</section>
+                         
 		</div>
 
 		<br>
@@ -153,7 +205,7 @@
 		<br>
 		
 		<div class="container">
-			<div class = "row col-lg-5">
+			<div class = "row col-lg-10 col-lg-offset-1">
 				<div class="col-lg-6 desc desc-a">
 					<h4><i class="fa fa-bullseye"></i> THE GOAL</h4>
 					<p>Etiam dictum gravida nibh at accum san. Quisque aliquam risus bibendum diam elementum, et tempus enim suscipit. Duis sit amet euismod.</p>
@@ -170,69 +222,6 @@
 					<br>
 					<h4><i class="fa fa-bar-chart"></i> THE STATICS</h4>
 					<p>Etiam dictum gravida nibh at accum san. Quisque aliquam risus bibendum diam elementum, et tempus enim suscipit. Duis sit amet euismod.</p>
-				</div>
-			</div>
-			<div class = "col-lg-offset-1 row col-lg-6">
-				<div class="row">
-					<div class = "cm-header">
-						<span>SIGN UP</span>
-					</div>
-					</br>
-					<form>
-						<div class = "row">
-							<input type="text" name="user" class="text-fld col-lg-8 col-lg-offset-2" placeholder="Full Name">
-						</div>
-						<div class = "row">
-							<input type="email" name="email" class="text-fld col-lg-8 col-lg-offset-2" placeholder="Email">
-						</div>
-						<div class = "row">
-							<input type="text" name="user" class="text-fld col-lg-8 col-lg-offset-2" placeholder="Username">
-						</div>
-						<div class = "row">
-							<input type="password" name="pass" class="pass-fld col-lg-8 col-lg-offset-2" placeholder="Password">
-						</div>
-						<div class = "row">
-							<input type="password" name="pass" class="pass-fld col-lg-8 col-lg-offset-2" placeholder="Confirm Password">
-						</div>
-
-						<br>
-						<div class = "cm-header">
-							<span>BILLING ADDRESS</span>
-						</div>
-						</br>
-
-						<div class = "row">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="House #">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="Street">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="Subdivision">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="City">
-						</div>
-						<div class = "row">
-							<input type="text" name="user" class="text-fld col-lg-3 col-lg-offset-3" placeholder="Postal">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="Country">
-						</div>
-
-						<br>
-						<div class = "cm-header">
-							<span>SHIPPING ADDRESS</span>
-						</div>
-						</br>
-
-						<div class = "row">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="House #">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="Street">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="Subdivision">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="City">
-						</div>
-						<div class = "row">
-							<input type="text" name="user" class="text-fld col-lg-3 col-lg-offset-3" placeholder="Postal">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="Country">
-						</div>
-						<div class = "row">
-						<br>
-						<input type="submit" name="login" class="btn btn-lg register-btn" value="REGISTER">
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>
@@ -328,8 +317,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <!-- <script src="assets/js/bootstrap.min.js"></script> -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/main.js"></script>
 </body>
 </html>

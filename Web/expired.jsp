@@ -15,13 +15,14 @@
     <link href="assets/css/main.css" rel="stylesheet">
     <link href="assets/css/loginmodal.css" rel="stylesheet">
     <link href="assets/css/register.css" rel="stylesheet">
+    <link href="assets/css/productpage.css" rel="stylesheet">
 	<link rel="stylesheet" href="assets/css/font-awesome-4.6.3/css/font-awesome.min.css">
 	<!-- <link rel="stylesheet" id="font-awesome-css" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" type="text/css" media="screen"> -->
  
 
     <script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/Chart.js"></script>
-	<script src="assets/js/custom.js"></script>
+	<!-- <script src="assets/js/custom.js"></script> -->
+	<!-- <script src="assets/js/pinterest.js"></script> -->
 
 	
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
@@ -86,44 +87,17 @@
 
 	<!-- ========== CAROUSEL / DESCRIPTION - DARK GREY SECTION ========== -->
 	<div id="w2">
-		<div class="container">
-			<div class = "cm-header">
-				<span>FEATURED BRANDS</span>
-			</div>
-		</div><!-- /container -->
 
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-2 col-lg-offset-2">
-					<img class="img-responsive" src="assets\img\brand1.png"/>
-				</div>
-				<div class="col-lg-2">
-					<img class="img-responsive" src="assets\img\brand2.png"/>
-				</div>
-				<div class="col-lg-2">
-					<img class="img-responsive" src="assets\img\brand3.png"/>
-				</div>
-				<div class="col-lg-2">
-					<img class="img-responsive" src="assets\img\brand4.png"/>
-				</div>
-			</div>
-			</br>
-			<div class="row">
-				<div class="col-lg-2 col-lg-offset-2">
-					<img class="img-responsive" src="assets\img\brand5.png"/>
-				</div>
-				<div class="col-lg-2">
-					<img class="img-responsive" src="assets\img\brand6.png"/>
-				</div>
-				<div class="col-lg-2">
-					<img class="img-responsive" src="assets\img\brand7.png"/>
-				</div>
-				<div class="col-lg-2">
-					<img class="img-responsive" src="assets\img\brand8.png"/>
+			<div class = "row">
+				<div class = "col-lg-6 col-lg-offset-3">
+					<h1>YOUR ACCOUNT HAS <b>EXPIRED</b></h1>
 				</div>
 			</div>
 		</div>
 
+		<br>
+		<br>
 		<br>
 		<div class="container">
 			<div class = "cm-header">
@@ -134,7 +108,7 @@
 		<br>
 		
 		<div class="container">
-			<div class = "row col-lg-5">
+			<div class = "row col-lg-10 col-lg-offset-1">
 				<div class="col-lg-6 desc desc-a">
 					<h4><i class="fa fa-bullseye"></i> THE GOAL</h4>
 					<p>Etiam dictum gravida nibh at accum san. Quisque aliquam risus bibendum diam elementum, et tempus enim suscipit. Duis sit amet euismod.</p>
@@ -151,70 +125,6 @@
 					<br>
 					<h4><i class="fa fa-bar-chart"></i> THE STATICS</h4>
 					<p>Etiam dictum gravida nibh at accum san. Quisque aliquam risus bibendum diam elementum, et tempus enim suscipit. Duis sit amet euismod.</p>
-				</div>
-			</div>
-			<div class = "col-lg-offset-1 row col-lg-6">
-				<div class="row">
-					<div class = "cm-header">
-						<span>SIGN UP</span>
-					</div>
-					</br>
-
-					<form>
-						<div class = "row">
-							<input type="text" name="user" class="text-fld col-lg-8 col-lg-offset-2" placeholder="Full Name">
-						</div>
-						<div class = "row">
-							<input type="email" name="email" class="text-fld col-lg-8 col-lg-offset-2" placeholder="Email">
-						</div>
-						<div class = "row">
-							<input type="text" name="user" class="text-fld col-lg-8 col-lg-offset-2" placeholder="Username">
-						</div>
-						<div class = "row">
-							<input type="password" name="pass" class="pass-fld col-lg-8 col-lg-offset-2" placeholder="Password">
-						</div>
-						<div class = "row">
-							<input type="password" name="pass" class="pass-fld col-lg-8 col-lg-offset-2" placeholder="Confirm Password">
-						</div>
-
-						<br>
-						<div class = "cm-header">
-							<span>BILLING ADDRESS</span>
-						</div>
-						</br>
-
-						<div class = "row">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="House #">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="Street">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="Subdivision">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="City">
-						</div>
-						<div class = "row">
-							<input type="text" name="user" class="text-fld col-lg-3 col-lg-offset-3" placeholder="Postal">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="Country">
-						</div>
-
-						<br>
-						<div class = "cm-header">
-							<span>SHIPPING ADDRESS</span>
-						</div>
-						</br>
-
-						<div class = "row">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="House #">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="Street">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="Subdivision">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="City">
-						</div>
-						<div class = "row">
-							<input type="text" name="user" class="text-fld col-lg-3 col-lg-offset-3" placeholder="Postal">
-							<input type="text" name="user" class="text-fld col-lg-3" placeholder="Country">
-						</div>
-						<div class = "row">
-						<br>
-						<input type="submit" name="login" class="btn btn-lg register-btn" value="REGISTER">
-						</div>
-					</form>
 				</div>
 			</div>
 		</div>
@@ -310,7 +220,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- <script src="assets/js/bootstrap.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="assets/js/main.js"></script>
 </body>
 </html>

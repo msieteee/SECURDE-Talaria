@@ -610,3 +610,10 @@ a:after {
 	padding-left: 10px;
 }
 
+.error-log{
+	border: solid #ff2623 .5px !important;
+}
+
+.error-text{
+	color: #ff2623;
+}
