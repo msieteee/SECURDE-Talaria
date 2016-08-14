@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.common.cache.Cache;
+
 import models.Account;
 import security.Authenticator;
 import security.BCrypt;
@@ -61,6 +63,10 @@ public class Controller extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (path.equals("/Authentication")) {
 			HttpSession session = request.getSession(false);
+			
+			Cache<String, Boolean> csrfPreventionSaltCache = (Cache<String, Boolean>) session
+					.getAttribute("csrfPreventionSaltCache");
+			
 			if (session != null)
 				session.invalidate();
 
@@ -82,6 +88,11 @@ public class Controller extends HttpServlet {
 				// Generate a new session
 				request.getSession().invalidate();
 				userSession = request.getSession(true);
+				
+				
+				userSession.setAttribute("csrfPreventionSaltCache", csrfPreventionSaltCache);
+				System.out.println(csrfPreventionSaltCache);
+				
 				// Set timeout to 30 minutes
 				userSession.setMaxInactiveInterval(1800);
 				// Get client IP Address
@@ -105,40 +116,51 @@ public class Controller extends HttpServlet {
 
 				switch (userLoggedIn.getRoleID()) {
 				case 1:
-					response.sendRedirect("admin.jsp");
+//					response.sendRedirect("admin.jsp");
+					request.getRequestDispatcher("admin.jsp").forward(request, response);
 					break;
 				case 2:
 					if (queries.getAccountStatus(custID) == 1)
-						response.sendRedirect("ProductManagerProducts");
+//						response.sendRedirect("ProductManagerProducts");
+						request.getRequestDispatcher("ProductManagerProducts").forward(request, response);
 					else if (queries.getAccountStatus(custID) == 0)
-						response.sendRedirect("validation.jsp");
+//						response.sendRedirect("validation.jsp");
+						request.getRequestDispatcher("validation.jsp").forward(request, response);
 					else if (queries.getAccountStatus(custID) == 0 && diffHours > 24) {
 						queries.updateAccountStatus(custID, 2);
-						response.sendRedirect("expired.jsp");
+//						response.sendRedirect("expired.jsp");
+						request.getRequestDispatcher("expire.jsp").forward(request, response);
 					}
 					break;
 				case 3:
 					if (queries.getAccountStatus(custID) == 1)
-						response.sendRedirect("TransactionReport");
+//						response.sendRedirect("TransactionReport");
+						request.getRequestDispatcher("TransactionReport").forward(request, response);
 					else if (queries.getAccountStatus(custID) == 0)
-						response.sendRedirect("validation.jsp");
+//						response.sendRedirect("validation.jsp");
+						request.getRequestDispatcher("validation.jsp").forward(request, response);
 					else if (queries.getAccountStatus(custID) == 0 && diffHours > 24) {
 						queries.updateAccountStatus(custID, 2);
-						response.sendRedirect("expired.jsp");
+//						response.sendRedirect("expired.jsp");
+						request.getRequestDispatcher("expired.jsp").forward(request, response);
 					}
 					break;
 				case 4:
 					if (queries.getAccountStatus(custID) == 1)
-						response.sendRedirect("Products");
+//						response.sendRedirect("Products");
+						request.getRequestDispatcher("Products").forward(request, response);
 					else if (queries.getAccountStatus(custID) == 2)
-						response.sendRedirect("expired.jsp");
+//						response.sendRedirect("expired.jsp");
+						request.getRequestDispatcher("expired.jsp").forward(request, response);
 					break;
 				default:
-					response.sendRedirect("index-error.jsp");
+//					response.sendRedirect("index-error.jsp");
+					request.getRequestDispatcher("index-error.jsp").forward(request, response);
 					break;
 				}
 			} else {
-				response.sendRedirect("index-error.jsp");
+//				response.sendRedirect("index-error.jsp");
+				request.getRequestDispatcher("index-error.jsp").forward(request, response);
 			}
 		} else if (path.equals("/Register")) {
 			String name = null;
@@ -211,7 +233,8 @@ public class Controller extends HttpServlet {
 				request.getSession().setAttribute("ba_id", ba_id);
 				request.getSession().setAttribute("sa_id", sa_id);
 
-				response.sendRedirect("index.jsp");
+//				response.sendRedirect("index.jsp");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			} finally {
 			}
 		} else if (path.equals("/AddProductManager")) {
@@ -230,7 +253,8 @@ public class Controller extends HttpServlet {
 
 			queries.addProductManager(username, hashedPassword, 2);
 			
-			response.sendRedirect("index.jsp");
+//			response.sendRedirect("index.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (path.equals("/AddAccountManager")) {
 			String username = null;
 			String password = null;
@@ -246,7 +270,8 @@ public class Controller extends HttpServlet {
 			}
 
 			queries.addAccountManager(username, hashedPassword, 3);
-			response.sendRedirect("index.jsp");
+//			response.sendRedirect("index.jsp");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (path.equals("/AddProduct")) {
 			String name = null;
 			String category = null;
@@ -268,7 +293,8 @@ public class Controller extends HttpServlet {
 
 			request.getSession().setAttribute("allProducts", products);
 
-			response.sendRedirect("product-manager-products.jsp");
+//			response.sendRedirect("product-manager-products.jsp");
+			request.getRequestDispatcher("product-manager-products.jsp").forward(request, response);
 		} else if (path.equals("/EditProduct")) {
 			ArrayList<ProductDetails> products = new ArrayList<ProductDetails>();
 			products = queries.getProducts();
@@ -553,9 +579,11 @@ public class Controller extends HttpServlet {
 				queries.updateAccountStatus(custID, 1);
 
 				if (a.getRoleID() == 2)
-					response.sendRedirect("ProductManagerProducts");
+//					response.sendRedirect("ProductManagerProducts");
+					request.getRequestDispatcher("ProductManagerProducts").forward(request, response);
 				else if (a.getRoleID() == 3)
-					response.sendRedirect("TransactionReport");
+//					response.sendRedirect("TransactionReport");
+					request.getRequestDispatcher("TransactionReport").forward(request, response);
 			}
 		}
 	}
