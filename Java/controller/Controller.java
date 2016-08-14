@@ -67,8 +67,8 @@ public class Controller extends HttpServlet {
 			Cache<String, Boolean> csrfPreventionSaltCache = (Cache<String, Boolean>) session
 					.getAttribute("csrfPreventionSaltCache");
 			
-			if (session != null)
-				session.invalidate();
+//			if (session != null)
+//				session.invalidate();
 
 			Account userLoggedIn = null;
 			String clientAddress = null;

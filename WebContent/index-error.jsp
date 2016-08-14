@@ -289,7 +289,7 @@
 			<div class="loginmodal-container">
 				<h1 class = "to-white"><b>TALARIA</b></h1>
 			  	<h5 class = "error-text text-center">Wrong username or password</h5>
-			  	<form>
+			  	<form method="POST" action="Authentication">
 			  		<input type="hidden" name="csrfPreventionSalt" value="${csrfPreventionSalt}"/>
 					<input type="text" name="user" class="error-log" placeholder="Username">
 					<input type="password" name="pass" class="error-log" placeholder="Password">

@@ -62,9 +62,9 @@ public class LoadSalt implements Filter {
 	private boolean excludeFromFilter(String path) {
 		if(path == null) return false;
 		
-		if(!path.matches("/StartServlet|.*\\.(css|jpg|png|gif|js|svg|ttf|woff|woff2)$")) {
+		if(!path.matches(".*\\.(css|jpg|png|gif|js|svg|ttf|woff|woff2)$")) {
 			System.out.println("path: " + path);
-			System.out.println(path.matches("/StartServlet|.*\\.(css|jpg|png|gif|js|svg|ttf|woff|woff2)$"));
+			System.out.println(path.matches(".*\\.(css|jpg|png|gif|js|svg|ttf|woff|woff2)$"));
 		}
 			
 		return path.matches(".*\\.(css|jpg|png|gif|js|svg|ttf|woff|woff2)$");

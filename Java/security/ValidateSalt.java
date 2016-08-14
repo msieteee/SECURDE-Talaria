@@ -27,7 +27,7 @@ public class ValidateSalt implements Filter {
 		// Validate that the salt is in the cache
 		Cache<String, Boolean> csrfPreventionSaltCache = (Cache<String, Boolean>) httpReq.getSession()
 				.getAttribute("csrfPreventionSaltCache");
-System.out.println(csrfPreventionSaltCache.asMap());
+			System.out.println(csrfPreventionSaltCache);
 			System.out.println("validate saltttt: " + salt);
 		if (csrfPreventionSaltCache != null && salt != null && csrfPreventionSaltCache.getIfPresent(salt) != null) {
 			csrfPreventionSaltCache.invalidate(salt);
