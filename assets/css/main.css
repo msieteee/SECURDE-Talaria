@@ -89,6 +89,14 @@ a:after {
 	background-color: #efefef !important;
 }
 
+.white-text{
+	color: white;
+}
+
+.header-name{
+	font-size: 4em;
+}
+
 
 /* ==========================================================================
    Wrap Sections
