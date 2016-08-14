@@ -12,20 +12,28 @@
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
     
-	<filter>
-	    <filter-name>validateSalt</filter-name>
-	    <filter-class>security.ValidateSalt</filter-class>
+    <filter>
+	    <filter-name>XFrameFilter</filter-name>
+	    <filter-class>security.XFrameFilter</filter-class>
 	</filter>
 	<filter-mapping>
-	    <filter-name>validateSalt</filter-name>
+	    <filter-name>XFrameFilter</filter-name>
 	    <url-pattern>*</url-pattern>
 	</filter-mapping>
 	<filter>
-	    <filter-name>loadSalt</filter-name>
+	    <filter-name>ValidateSalt</filter-name>
+	    <filter-class>security.ValidateSalt</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>ValidateSalt</filter-name>
+	    <url-pattern>*</url-pattern>
+	</filter-mapping>
+	<filter>
+	    <filter-name>LoadSalt</filter-name>
 	    <filter-class>security.LoadSalt</filter-class>
 	</filter>
 	<filter-mapping>
-	    <filter-name>loadSalt</filter-name>
+	    <filter-name>LoadSalt</filter-name>
 	    <url-pattern>*</url-pattern>
 	</filter-mapping>
 </web-app>
