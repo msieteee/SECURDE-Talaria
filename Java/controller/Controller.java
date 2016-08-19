@@ -118,7 +118,7 @@ public class Controller extends HttpServlet {
 					System.out.println(csrfPreventionSaltCache);
 					
 					// Set timeout to 30 minutes
-					userSession.setMaxInactiveInterval(1800);
+					userSession.setMaxInactiveInterval(30*60);
 					// Get client IP Address
 					clientAddress = request.getRemoteAddr();
 	

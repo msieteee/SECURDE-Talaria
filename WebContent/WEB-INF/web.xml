@@ -13,6 +13,14 @@
     </session-config>
     
     <filter>
+	    <filter-name>SessionExpirationFilter</filter-name>
+	    <filter-class>security.SessionExpirationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>SessionExpirationFilter</filter-name>
+	    <url-pattern>*</url-pattern>
+	</filter-mapping>
+    <filter>
 	    <filter-name>XFrameFilter</filter-name>
 	    <filter-class>security.XFrameFilter</filter-class>
 	</filter>
@@ -37,3 +45,12 @@
 	    <url-pattern>*</url-pattern>
 	</filter-mapping>
 </web-app>
+
+
+
+
+
+
+
+
+
