@@ -12,7 +12,7 @@
 	-moz-box-sizing: border-box;
 }
 
-.text-fld:hover, .pass-fld:hover{
+.text-fld:hover, .pass-fld:hover, .cust-area:hover{
 	border: 1px solid #b9b9b9;
 	border-top: 1px solid #a0a0a0;
 	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
@@ -40,7 +40,6 @@
 	outline-color: red !important;
 }
 
-input[type=text]:focus, input[type=password]:focus, input[type=number]:focus, input[type=email]:focus{
-	outline-color: #1a1a1a;
+.cust-area:focus, input[type=text]:focus, input[type=password]:focus, input[type=number]:focus, input[type=email]:focus{
+	outline-color: #1a1a1a !important;
 }
-
