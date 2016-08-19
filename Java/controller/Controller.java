@@ -60,8 +60,11 @@ public class Controller extends HttpServlet {
 
 		if (path.equals("/StartServlet")) {
 			System.out.println("START SERVLET");
+			queries.checkAccountValidity();
+			queries.checkAccountExpiry();
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (path.equals("/Authentication")) {
+			queries.checkAccountValidity();
 			HttpSession session = request.getSession(false);
 			
 			Cache<String, Boolean> csrfPreventionSaltCache = (Cache<String, Boolean>) session
@@ -78,88 +81,113 @@ public class Controller extends HttpServlet {
 			String password = request.getParameter("pass");
 			String hashedPassword = queries.getHashedPassword(username);
 
-			if (BCrypt.checkpw(password, hashedPassword)) {
-				userLoggedIn = queries.getAuthentication(username, hashedPassword);
-				userLoggedIn.setIsLoggedIn(Boolean.TRUE);
-			}
-
-			// Create session information
-			if (userLoggedIn != null && userLoggedIn.getIsLoggedIn()) {
-				// Generate a new session
-				request.getSession().invalidate();
-				userSession = request.getSession(true);
-				
-				
-				userSession.setAttribute("csrfPreventionSaltCache", csrfPreventionSaltCache);
-				System.out.println(csrfPreventionSaltCache);
-				
-				// Set timeout to 30 minutes
-				userSession.setMaxInactiveInterval(1800);
-				// Get client IP Address
-				clientAddress = request.getRemoteAddr();
-
-				// Save user to session
-				userSession.setAttribute("session_user", userLoggedIn);
-				userSession.setAttribute("ba_id", queries.getBillingID(userLoggedIn.getCustomerID()));
-				userSession.setAttribute("sa_id", queries.getShippingID(userLoggedIn.getCustomerID()));
-
-				int custID = userLoggedIn.getCustomerID();
-
-				queries.updateTimestamp(custID);
-				java.util.Date today = new java.util.Date();
-				java.sql.Timestamp currentTime = new java.sql.Timestamp(today.getTime());
-				java.sql.Timestamp dateCreated = queries.getTimestampCreated(custID);
-				long milliseconds1 = dateCreated.getTime();
-				long milliseconds2 = currentTime.getTime();
-				long diff = milliseconds2 - milliseconds1;
-				long diffHours = diff / (60 * 60 * 1000);
-
-				switch (userLoggedIn.getRoleID()) {
-				case 1:
-//					response.sendRedirect("admin.jsp");
-					request.getRequestDispatcher("admin.jsp").forward(request, response);
-					break;
-				case 2:
-					if (queries.getAccountStatus(custID) == 1)
-//						response.sendRedirect("ProductManagerProducts");
-						request.getRequestDispatcher("ProductManagerProducts").forward(request, response);
-					else if (queries.getAccountStatus(custID) == 0)
-//						response.sendRedirect("validation.jsp");
-						request.getRequestDispatcher("validation.jsp").forward(request, response);
-					else if (queries.getAccountStatus(custID) == 0 && diffHours > 24) {
-						queries.updateAccountStatus(custID, 2);
-//						response.sendRedirect("expired.jsp");
-						request.getRequestDispatcher("expire.jsp").forward(request, response);
+			if(queries.doesUsernameExist(username)) {
+				if (BCrypt.checkpw(password, hashedPassword)) {
+					userLoggedIn = queries.getAuthentication(username, hashedPassword);
+					userLoggedIn.setIsLoggedIn(Boolean.TRUE);
+				} else {
+					queries.updateFailedAttempts(username);
+					Account tmpt = queries.checkAuthenticationForWrongPassword(username);
+					if(tmpt.isExpired()) {
+						request.getRequestDispatcher("index-error-expired.jsp").forward(request, response);
+						return;
+					} else if(tmpt.isLocked()) {
+						request.getRequestDispatcher("index-error-locked.jsp").forward(request, response);
+						return;
 					}
-					break;
-				case 3:
-					if (queries.getAccountStatus(custID) == 1)
-//						response.sendRedirect("TransactionReport");
-						request.getRequestDispatcher("TransactionReport").forward(request, response);
-					else if (queries.getAccountStatus(custID) == 0)
-//						response.sendRedirect("validation.jsp");
-						request.getRequestDispatcher("validation.jsp").forward(request, response);
-					else if (queries.getAccountStatus(custID) == 0 && diffHours > 24) {
-						queries.updateAccountStatus(custID, 2);
-//						response.sendRedirect("expired.jsp");
-						request.getRequestDispatcher("expired.jsp").forward(request, response);
+				}
+				
+				//when user password is correct
+				if(userLoggedIn != null && userLoggedIn.isExpired()) {
+					userLoggedIn.setIsLoggedIn(Boolean.FALSE);
+					request.getRequestDispatcher("index-error-expired.jsp").forward(request, response);
+					return;
+				} else if(userLoggedIn != null && userLoggedIn.isLocked()) {
+					userLoggedIn.setIsLoggedIn(Boolean.FALSE);
+					request.getRequestDispatcher("index-error-locked.jsp").forward(request, response);
+					return;
+				} 
+
+				// Create session information
+				if (userLoggedIn != null && userLoggedIn.getIsLoggedIn()) {
+					// Generate a new session
+					request.getSession().invalidate();
+					userSession = request.getSession(true);
+					
+					userSession.setAttribute("csrfPreventionSaltCache", csrfPreventionSaltCache);
+					System.out.println(csrfPreventionSaltCache);
+					
+					// Set timeout to 30 minutes
+					userSession.setMaxInactiveInterval(1800);
+					// Get client IP Address
+					clientAddress = request.getRemoteAddr();
+	
+					// Save user to session
+					userSession.setAttribute("session_user", userLoggedIn);
+					userSession.setAttribute("ba_id", queries.getBillingID(userLoggedIn.getCustomerID()));
+					userSession.setAttribute("sa_id", queries.getShippingID(userLoggedIn.getCustomerID()));
+	
+					int custID = userLoggedIn.getCustomerID();
+	
+					queries.updateTimestamp(custID);
+					java.util.Date today = new java.util.Date();
+					java.sql.Timestamp currentTime = new java.sql.Timestamp(today.getTime());
+					java.sql.Timestamp dateCreated = queries.getTimestampCreated(custID);
+					long milliseconds1 = dateCreated.getTime();
+					long milliseconds2 = currentTime.getTime();
+					long diff = milliseconds2 - milliseconds1;
+					long diffHours = diff / (60 * 60 * 1000);
+	
+					switch (userLoggedIn.getRoleID()) {
+					case 1:
+	//					response.sendRedirect("admin.jsp");
+						request.getRequestDispatcher("admin.jsp").forward(request, response);
+						break;
+					case 2:
+						if (queries.getAccountStatus(custID) == 1)
+	//						response.sendRedirect("ProductManagerProducts");
+							request.getRequestDispatcher("ProductManagerProducts").forward(request, response);
+						else if (queries.getAccountStatus(custID) == 0)
+	//						response.sendRedirect("validation.jsp");
+							request.getRequestDispatcher("validation.jsp").forward(request, response);
+						else if (queries.getAccountStatus(custID) == 0 && diffHours > 24) {
+							queries.updateAccountStatus(custID, 2);
+	//						response.sendRedirect("expired.jsp");
+							request.getRequestDispatcher("expire.jsp").forward(request, response);
+						}
+						break;
+					case 3:
+						if (queries.getAccountStatus(custID) == 1)
+	//						response.sendRedirect("TransactionReport");
+							request.getRequestDispatcher("TransactionReport").forward(request, response);
+						else if (queries.getAccountStatus(custID) == 0)
+	//						response.sendRedirect("validation.jsp");
+							request.getRequestDispatcher("validation.jsp").forward(request, response);
+						else if (queries.getAccountStatus(custID) == 0 && diffHours > 24) {
+							queries.updateAccountStatus(custID, 2);
+	//						response.sendRedirect("expired.jsp");
+							request.getRequestDispatcher("expired.jsp").forward(request, response);
+						}
+						break;
+					case 4:
+						if (queries.getAccountStatus(custID) == 1)
+	//						response.sendRedirect("Products");
+							request.getRequestDispatcher("Products").forward(request, response);
+						else if (queries.getAccountStatus(custID) == 2)
+	//						response.sendRedirect("expired.jsp");
+							request.getRequestDispatcher("expired.jsp").forward(request, response);
+						break;
+					default:
+	//					response.sendRedirect("index-error.jsp");
+						request.getRequestDispatcher("index-error.jsp").forward(request, response);
+						break;
 					}
-					break;
-				case 4:
-					if (queries.getAccountStatus(custID) == 1)
-//						response.sendRedirect("Products");
-						request.getRequestDispatcher("Products").forward(request, response);
-					else if (queries.getAccountStatus(custID) == 2)
-//						response.sendRedirect("expired.jsp");
-						request.getRequestDispatcher("expired.jsp").forward(request, response);
-					break;
-				default:
-//					response.sendRedirect("index-error.jsp");
+				} else {
+	//				response.sendRedirect("index-error.jsp");
 					request.getRequestDispatcher("index-error.jsp").forward(request, response);
-					break;
+					return;
 				}
 			} else {
-//				response.sendRedirect("index-error.jsp");
 				request.getRequestDispatcher("index-error.jsp").forward(request, response);
 			}
 		} else if (path.equals("/Register")) {

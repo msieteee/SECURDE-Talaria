@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Queries {
@@ -35,6 +36,12 @@ public class Queries {
 				account.setCustomerID(rs.getInt("cust_id"));
 				account.setUsername(rs.getString("username"));
 				account.setRoleID(rs.getInt("role_id"));
+				
+				if(rs.getInt("status") == 2) {
+					account.setExpired(true);
+				} else if(rs.getInt("failedAttempts") > 3) {
+					account.setLocked(true);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -964,6 +971,187 @@ public class Queries {
 			pst.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<Account> getAllValidAccounts() {
+		ArrayList<Account> accounts = new ArrayList<Account>();
+
+		connection = new DBConnection().getConnection();
+
+		PreparedStatement pst;
+		String query = "SELECT username, lastLoggedIn, failedAttempts, lastFailed FROM accounts WHERE status = ? OR ?";
+		ResultSet rs = null;
+
+		try {
+			pst = connection.prepareStatement(query);
+			pst.setInt(1, 0);
+			pst.setInt(2, 1);
+			rs = pst.executeQuery();
+			while (rs.next()) {
+				String username = rs.getString("username");
+				java.util.Date lastLogged = rs.getTimestamp("lastLoggedIn");
+				java.util.Date lastFailed = rs.getTimestamp("lastFailed");
+				int failedAttempts = rs.getInt("failedAttempts");
+				Account a = new Account();
+				a.setUsername(username);
+				a.setLastLoggedIn(lastLogged);
+				a.setLastFailed(lastFailed);
+				a.setFailedAttempts(failedAttempts);
+				accounts.add(a);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return accounts;
+	}
+	
+	public java.util.Date getLastLoggedIn(String username) {
+		java.util.Date lastLogged = null;
+		
+		connection = new DBConnection().getConnection();
+
+		PreparedStatement pst;
+		String query = "SELECT * FROM accounts WHERE username = ?";
+		ResultSet rs = null;
+
+		try {
+			pst = connection.prepareStatement(query);
+			pst.setString(1, username);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				lastLogged = rs.getTimestamp("lastLoggedIn");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return lastLogged;
+	}
+	
+	public void invalidateAccount(String username) {
+		connection = new DBConnection().getConnection();
+
+		PreparedStatement pst;
+		String query = "UPDATE accounts SET status = ? WHERE username = ?";
+
+		try {
+			pst = connection.prepareStatement(query);
+			pst.setInt(1, 2);
+			pst.setString(2, username);
+			pst.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//check if accounts are expired
+	public void checkAccountExpiry() {
+		java.util.Date today = new java.util.Date();
+		java.util.Date date = new Date(today.getTime());
+		
+		ArrayList<Account> accounts = getAllValidAccounts();
+		for(int i = 0; i < accounts.size(); i++) {
+			Account a = accounts.get(i);
+			
+			long milliSecondsCurrent = date.getTime();
+			long milliSecondsLastLogged = a.getLastLoggedIn().getTime();
+			long diff = milliSecondsCurrent - milliSecondsLastLogged;
+			long diffDays = diff / (24 * 60 * 60 * 1000);
+			
+			if(diffDays > 365) {
+				invalidateAccount(a.getUsername());
+			}
+		}
+	}
+	
+	public void updateFailedAttempts(String username) {
+		connection = new DBConnection().getConnection();
+
+		PreparedStatement pst;
+		String query = "UPDATE accounts "
+				+ "SET failedAttempts = failedAttempts + 1, "
+				+ "lastFailed = ?"
+				+ "WHERE username = ?";
+
+		try {
+			pst = connection.prepareStatement(query);
+			java.util.Date today = new java.util.Date();
+			java.sql.Timestamp timestamp = new java.sql.Timestamp(today.getTime());
+			pst.setTimestamp(1, timestamp);
+			pst.setString(2, username);
+			pst.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public Account checkAuthenticationForWrongPassword(String username) {
+		Account account = null;
+
+		connection = new DBConnection().getConnection();
+
+		PreparedStatement pst;
+		String query = "SELECT * FROM accounts WHERE username = ?";
+		ResultSet rs = null;
+
+		try {
+			pst = connection.prepareStatement(query);
+			pst.setString(1, username);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				account = new Account();
+				
+				if(rs.getInt("status") == 2) {
+					account.setExpired(true);
+				} else if(rs.getInt("failedAttempts") > 3) {
+					account.setLocked(true);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return account;
+	}
+	
+	public void setBack(String username) {
+		connection = new DBConnection().getConnection();
+
+		PreparedStatement pst;
+		String query = "UPDATE accounts SET failedAttempts = 0 WHERE username = ?";
+
+		try {
+			pst = connection.prepareStatement(query);
+			pst.setString(1, username);
+			pst.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void checkAccountValidity() {
+		java.util.Date today = new java.util.Date();
+		java.util.Date date = new Date(today.getTime());
+		
+		ArrayList<Account> accounts = getAllValidAccounts();
+		for(int i = 0; i < accounts.size(); i++) {
+			Account a = accounts.get(i);
+			
+			if(a.getFailedAttempts() != 0) {
+				long milliSecondsCurrent = date.getTime();
+				long milliSecondsLastLogged = a.getLastFailed().getTime();
+				long diff = milliSecondsCurrent - milliSecondsLastLogged;
+				long diffDays = diff / (24 * 60 * 60 * 1000);
+				
+				//if 1 day since lastFailed, set failedAttempts to 0
+				if(diffDays > 1) {
+					setBack(a.getUsername());
+				}
+			}
 		}
 	}
 }

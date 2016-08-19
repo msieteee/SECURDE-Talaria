@@ -19,15 +19,15 @@ public class DBConnection {
 		}
 		this.driverName = "com.mysql.jdbc.DriverManager";
 		this.url = "jdbc:mysql://127.0.0.1:3306/";
-		this.dbName = "securde";
+		this.dbName = "securde_v7";
 		this.username = "root"; //root
-		this.password = "1234";
+		this.password = "";
 	}
 
 	public Connection getConnection() {
 		try {
 			System.out.println("connected!!!");
-			return DriverManager.getConnection(url + dbName, username, password);
+			return DriverManager.getConnection(url + dbName + "?zeroDateTimeBehavior=convertToNull", username, password);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
